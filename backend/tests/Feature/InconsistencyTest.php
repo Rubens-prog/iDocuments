@@ -40,7 +40,7 @@ test('it creates an inconsistency', function () {
 
     $response = $this->postJson('/api/inconsistencies', $data);
 
-    $response->asserttatSus(201);
+    $response->assertStatus(201);
 
     $this->assertDatabaseHas('inconsistencies', [
         'email' => 'rubens@email.com',
