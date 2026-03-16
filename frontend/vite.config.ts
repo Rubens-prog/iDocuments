@@ -32,10 +32,6 @@ export default defineConfig({
         replacement: path.resolve(__dirname, "src/utils"),
       },
       {
-        find: "@grapesjs",
-        replacement: path.resolve(__dirname, "src/grapesjs"),
-      },
-      {
         find: "@pages",
         replacement: path.resolve(__dirname, "src/pages"),
       },
@@ -50,6 +46,10 @@ export default defineConfig({
       {
         find: "@hooks",
         replacement: path.resolve(__dirname, "src/hooks"),
+      },
+      {
+        find: "@routes",
+        replacement: path.resolve(__dirname, "src/routes"),
       },
     ],
   },

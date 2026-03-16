@@ -13,9 +13,9 @@ use App\Http\Requests\InconsistencyRequest;
         {
         }
 
-        public function index()
+        public function index(Request $request)
         {
-            return $this->inconsistency->index();
+            return $this->inconsistency->index($request);
         }
 
         public function store(InconsistencyRequest $request)
@@ -25,6 +25,20 @@ use App\Http\Requests\InconsistencyRequest;
              return response()->json([
                  'message'=> "Enviado com sucesso!",
              ], 200);
+        }
+
+        public function show(Request $request)
+        {
+           $data =  $this->inconsistency->show($request->id);
+
+           if(!$data){
+            return response()->json([
+                'message'=> "Registro não encontrado"
+            ],404);
+           }
+
+           return response()->json($data);
+
         }
 
         public function download($id)

@@ -13,7 +13,8 @@ class AuthService
 
         if (!Auth::attempt($credentials)) {
             return response()->json([
-                'message' => 'Invalid credentials'
+                'message' => 'Credenciais Inválidas',
+                "credentials"=> $credentials
             ], 401);
         }
 

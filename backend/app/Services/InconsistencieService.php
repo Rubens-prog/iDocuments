@@ -9,12 +9,22 @@ use Illuminate\Support\Facades\Storage;
 
 class InconsistencieService
 {
-    public static function index()
+    public static function index(Request $request)
     {
-        return response()->json([
-            'message' => 'justATest Service',
-            'status' => 'ok'
-        ], 200);
+        $search = $request->input("search");
+        $page = $request->input("page");
+
+
+        $query = Inconsistency::query()->with('category');
+
+        if(!empty($search) ){
+            $query->where('name', 'LIKE', '%'.$search.'%')
+            ->orWhere('email', 'LIKE', '%' . $search . '%');
+        }
+
+        $data = $query->paginate(1);
+
+        return response()->json($data, 200);
     }
 
     public static function store(Request $request)
@@ -35,13 +45,19 @@ class InconsistencieService
         return $model;
     }
 
+    public static function show(int $id)
+    {
+        $data = Inconsistency::with('category')->find($id);
+        return $data;
+    }
+
     public function download($id)
     {
         $document = Inconsistency::find($id);
 
         if(!$document) {
             return response()->json([
-                'message' => 'Não achei',
+                'message' => 'Registro não encontrado',
             ], 200);
         }
 

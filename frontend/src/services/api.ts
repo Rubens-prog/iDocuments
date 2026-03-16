@@ -1,3 +1,4 @@
+import { getStorageToken } from "@storage/auth-storage";
 import axios from "axios";
 import Swal from "sweetalert2";
 
@@ -12,6 +13,8 @@ const Toast = Swal.mixin({
     toast.onmouseleave = Swal.resumeTimer;
   },
 });
+
+const token = getStorageToken();
 
 export const api = axios.create({
   baseURL: `http://localhost:8000`,
@@ -32,3 +35,7 @@ api.interceptors.response.use(
     });
   },
 );
+
+if (token) {
+  api.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+}

@@ -9,13 +9,12 @@ use App\Http\Middleware\EnsureTokenIsValid;
 
 
 Route::get('/categories', [CategoryController::class, 'index']);
-
-
 Route::post('/inconsistencies', [InconsistencieController::class, 'store']);
 
 
 
-Route::prefix('admin')->middleware(EnsureTokenIsValid::class)->group(function () {
-
-    Route::get('/admin/inconsistencies/{id}/file', [InconsistencieController::class, 'download']);
+Route::middleware(EnsureTokenIsValid::class)->group(function () {
+    Route::get('/inconsistencies', [InconsistencieController::class, 'index']);
+    Route::get('/inconsistencies/{id}/file', [InconsistencieController::class, 'download']);
+    Route::get('/inconsistencies/show/{id}', [InconsistencieController::class, 'show']);
 });

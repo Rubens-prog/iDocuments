@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { getCategories } from "../categorie";
+import { getCategories } from "..";
 
 export function useGetCategories() {
   return useQuery({
