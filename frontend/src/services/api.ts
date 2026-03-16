@@ -2,6 +2,8 @@ import { getStorageToken } from "@storage/auth-storage";
 import axios from "axios";
 import Swal from "sweetalert2";
 
+const API_URL = import.meta.env.VITE_API_URL;
+
 const Toast = Swal.mixin({
   toast: true,
   position: "top-end",
@@ -17,7 +19,7 @@ const Toast = Swal.mixin({
 const token = getStorageToken();
 
 export const api = axios.create({
-  baseURL: `http://localhost:8000`,
+  baseURL: `${API_URL}`,
 });
 
 api.interceptors.response.use(
@@ -27,7 +29,8 @@ api.interceptors.response.use(
   function (error) {
     console.log("error =>", error);
     const errorMessage =
-      error.response.data.message || error.response.data.error || error.message;
+      error.response.data.message ||
+      "Ops! Ocorreu um erro inesperado. Tente novamente mais tarde.";
 
     Toast.fire({
       icon: "error",

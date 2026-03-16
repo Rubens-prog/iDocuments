@@ -24,7 +24,7 @@ use App\Http\Requests\InconsistencyRequest;
 
              return response()->json([
                  'message'=> "Enviado com sucesso!",
-             ], 200);
+             ], 201);
         }
 
         public function show(Request $request)
