@@ -63,3 +63,9 @@ POST /auth/logout                                # Logout
 # Run PHP tests
 docker compose exec backend php artisan test
 ```
+
+
+## Login
+
+email: admin@example.com
+password: 123
